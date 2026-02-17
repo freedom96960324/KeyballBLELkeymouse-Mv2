@@ -19,7 +19,7 @@ manifest:
       remote: Dist16384
       revision: main
       path: modules/zmk-pmw3610-driver
-    - name: zmk-rgbled-widget // 追記
+    - name: zmk-rgbled-widget
       remote: caksoylar
       revision: main
 
