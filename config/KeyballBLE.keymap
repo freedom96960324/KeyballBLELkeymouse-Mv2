@@ -91,8 +91,8 @@
 
         ARROW {
             bindings = <
-&trans  &kp Q   &kp W   &kp E   &kp R           &trans                                  &trans     &trans          &trans     &trans  &trans  &kp BACKSPACE
-&trans  &none   &kp S   &kp D   &none           &kp UP_ARROW    &trans       &trans     &trans     &kp UP_ARROW    &trans     &trans  &trans  &kp ENTER
+&trans  &kp Q   &kp W   &kp E   &kp R           &trans                                  &kp F10    &kp F11         &kp I      &kp O   &trans  &kp BACKSPACE
+&trans  &none   &kp S   &kp D   &none           &kp UP_ARROW    &kp F2       &trans     &trans     &kp UP_ARROW    &trans     &trans  &trans  &kp ENTER
 &trans  &none   &none   &trans  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT    &trans     &kp LEFT   &kp DOWN_ARROW  &kp RIGHT  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &kp SPACE       &kp SPACE       &kp SPACE    &kp SPACE  &kp SPACE                                     &trans  &trans
             >;
