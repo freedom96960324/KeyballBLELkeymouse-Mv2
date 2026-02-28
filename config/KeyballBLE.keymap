@@ -34,12 +34,6 @@ macros {
 };
 
 behaviors {
-    win_bt3_to_l1: win_bt3_to_l1 {
-        compatible = "zmk,behavior-macro";
-        #binding-cells = <0>;
-        bindings = <&bt BT_SEL 3>, <&to 1>;
-    };
-
     lt_to_layer_0: lt_to_layer_0 {
         compatible = "zmk,behavior-hold-tap";
         label = "LAYER_TAP_TO_0";
@@ -129,9 +123,9 @@ behaviors {
 
 layer_6 {
     bindings = <
-        &trans &trans &trans &trans &trans &trans &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &win_bt3_to_l1 &bt BT_SEL 4 &trans
+        &trans &trans &trans &trans &trans &trans               &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3 &bt BT_SEL 4 &trans
+        &trans &trans &trans &trans &trans &trans &trans &trans &trans        &trans        &trans        &to 1        &trans       &trans
         &trans &trans &trans &trans &trans &trans &trans &trans &bt BT_DISC 0 &bt BT_DISC 1 &bt BT_DISC 2 &bt BT_DISC 3 &bt BT_DISC 4 &trans
-        &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
         &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &bt BT_CLR
     >;
 };
