@@ -102,7 +102,7 @@
 
         layer_4 {
             bindings = <
-&trans  &trans  &kp HOME        &kp UP_ARROW   &trans      &trans                      &kp LG(R)  &kp LC(PAGE_UP)  &kp LC(PAGE_DOWN)  &trans  &trans       &trans
+&trans  &trans  &kp HOME        &kp UP_ARROW   &kp PAGE_UP      &trans                      &kp LG(R)  &kp LC(PAGE_UP)  &kp LC(PAGE_DOWN)  &trans  &trans       &trans
 &trans  &trans  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW   &kp BSPC  &trans    &trans  &mkp MB3   &mkp MB1         &mkp MB2           &trans  &lt 5 SPACE  &trans
 &trans  &trans  &kp END         &trans          &trans       &trans    &trans    &trans  &trans     &mkp MB4         &mkp MB5           &trans  &trans       &trans
 &trans  &trans  &trans          &trans          &trans            &trans    &trans    &trans  &trans                                                 &trans       &trans
