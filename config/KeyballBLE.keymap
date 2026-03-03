@@ -77,7 +77,7 @@
         default_layer {
             bindings = <
 &kp ESC     &kp Q     &kp W     &kp E   &kp R  &kp T                                                 &kp Y        &kp U  &kp I      &kp O    &kp P        &kp MINUS
-&lt 4 TAB   &kp A     &kp S     &kp D   &kp F  &kp G        &mclk_or_scroll 5 MCLK    &kp LC(UP)     &kp H        &kp J  &kp K      &kp L    &lt 4 EQUAL  &kp SEMI
+&kp TAB     &lt 4 A   &kp S     &kp D   &kp F  &kp G        &mclk_or_scroll 5 MCLK    &kp LC(UP)     &kp H        &kp J  &kp K      &kp L    &lt 4 EQUAL  &kp SEMI
 &kp LSHIFT  &kp Z     &kp X     &kp C   &kp V  &kp B        &kp LC(LEFT)              &kp LC(RIGHT)  &kp N        &kp M  &kp COMMA  &kp DOT  &kp SLASH    &mt RSHFT LBKT
 &kp LGUI    &kp LALT  &kp LGUI  &trans  &mo 6  &lt 3 SPACE  &lt 2 LANG2               &lt 2 LANG1    &lt 3 ENTER                             &kp RALT     &mt LGUI RBKT
             >;
@@ -88,7 +88,7 @@
         layer_1 {
             bindings = <
 &kp ESC     &kp Q     &kp W     &kp E   &kp R  &kp T                                               &kp Y        &kp U  &kp I      &kp O    &kp P        &kp MINUS
-&lt 4 TAB   &kp A     &kp S     &kp D   &kp F  &kp G        &mclk_or_scroll 5 MCLK    &kp LG(TAB)  &kp H        &kp J  &kp K      &kp L    &lt 4 EQUAL  &kp SEMI
+&kp TAB     &lt 4 A   &kp S     &kp D   &kp F  &kp G        &mclk_or_scroll 5 MCLK    &kp LG(TAB)  &kp H        &kp J  &kp K      &kp L    &lt 4 EQUAL  &kp SEMI
 &kp LSHIFT  &kp Z     &kp X     &kp C   &kp V  &kp B        &kp LS(LA(TAB))           &kp LA(TAB)  &kp N        &kp M  &kp COMMA  &kp DOT  &kp SLASH    &mt RSHFT LBKT
 &kp LCTRL   &kp LALT  &kp LGUI  &trans  &mo 6  &lt 3 SPACE  &lt 2 INT5                &lt 2 INT4   &lt 3 ENTER                             &kp RALT     &mt LCTRL RBKT
             >;
