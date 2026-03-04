@@ -39,21 +39,9 @@
             bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
             label = "TO_LAYER_0";
         };
-mclk_scroll_hold: mclk_scroll_hold {
-    compatible = "zmk,behavior-macro";
-    #binding-cells = <0>;
-    label = "MCLK_SCROLL_HOLD";
-    bindings
-        = <&macro_press &mo 5>
-        , <&macro_press &mkp MCLK>
-        , <&macro_pause_for_release>
-        , <&macro_release &mkp MCLK>
-        , <&macro_release &mo 5>
-        ;
-};
     };
 
-    behaviors {
+      behaviors {
         lt_to_layer_0: lt_to_layer_0 {
             compatible = "zmk,behavior-hold-tap";
             label = "LAYER_TAP_TO_0";
@@ -82,25 +70,15 @@ mclk_scroll_hold: mclk_scroll_hold {
             bindings = <&mo>, <&mkp>;
         };
 
-    rc_or_mclk: rc_or_mclk {
-        compatible = "zmk,behavior-hold-tap";
-        label = "RC_OR_MCLK";
-        #binding-cells = <2>;
-        flavor = "balanced";
-        tapping-term-ms = <200>;
-        quick-tap-ms = <0>;
-        bindings = <&mkp>, <&mkp>;
-    };
-
-rc_or_scroll: rc_or_scroll {
-    compatible = "zmk,behavior-hold-tap";
-    label = "RC_OR_SCROLL";
-    #binding-cells = <1>;
-    flavor = "balanced";
-    tapping-term-ms = <200>;
-    quick-tap-ms = <0>;
-    bindings = <&mclk_scroll_hold>, <&mkp>;
-};
+        rc_or_mclk: rc_or_mclk {
+            compatible = "zmk,behavior-hold-tap";
+            label = "RC_OR_MCLK";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <0>;
+            bindings = <&mkp>, <&mkp>;
+        };
     };
 
     keymap {
@@ -152,10 +130,10 @@ rc_or_scroll: rc_or_scroll {
 
         layer_4 {
             bindings = <
-&trans  &trans  &kp HOME        &kp UP_ARROW    &kp PAGE_UP      &trans                              &kp HOME   &mkp MB4  &kp UP_ARROW    &kp PAGE_UP         &trans  &trans
-&trans  &trans  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp BSPC  &trans    &trans          &kp DEL    &none     &mkp MB1        &rc_or_scroll RCLK  &trans  &trans
-&trans  &trans  &kp END         &trans          &kp PAGE_DOWN    &trans    &trans    &trans          &kp END    &mkp MB5  &kp DOWN_ARROW  &kp PAGE_DOWN       &trans  &trans
-&trans  &trans  &trans          &trans          &trans           &trans    &trans    &kp LEFT_ARROW  &kp RIGHT                                                &trans  &trans
+&trans  &trans  &kp HOME        &kp UP_ARROW    &kp PAGE_UP      &trans                      &trans   &mkp MB4        &kp UP_ARROW    &kp PAGE_UP    &kp HOME         &trans
+&trans  &trans  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp BSPC  &trans    &trans  &kp DEL  &none           &mkp MB1        &mclk_or_scroll 5 MCLK  &trans  &trans
+&trans  &trans  &kp END         &trans          &kp PAGE_DOWN    &trans    &trans    &trans  &trans   &kp END         &mkp MB5        &kp DOWN_ARROW  &kp PAGE_DOWN  &trans
+&trans  &trans  &trans          &trans          &trans           &trans    &trans    &trans  &trans   &kp LEFT_ARROW  &kp RIGHT                                &trans  &trans
             >;
 
             sensor-bindings = <&ROTATE SCRL_DOWN SCRL_UP>;
