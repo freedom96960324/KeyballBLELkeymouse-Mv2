@@ -69,6 +69,16 @@
             quick-tap-ms = <0>;
             bindings = <&mo>, <&mkp>;
         };
+
+    rc_or_mclk: rc_or_mclk {
+        compatible = "zmk,behavior-hold-tap";
+        label = "RC_OR_MCLK";
+        #binding-cells = <2>;
+        flavor = "balanced";
+        tapping-term-ms = <200>;
+        quick-tap-ms = <0>;
+        bindings = <&mkp>, <&mkp>;
+    };
     };
 
     keymap {
@@ -120,10 +130,10 @@
 
         layer_4 {
             bindings = <
-&trans  &trans  &kp HOME        &kp UP_ARROW    &kp PAGE_UP      &trans                              &kp HOME   &mkp MB4  &kp UP_ARROW    &kp PAGE_UP    &trans  &trans
-&trans  &trans  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp BSPC  &trans    &trans          &kp DEL    &none     &mkp MB1        &mkp MB2       &trans  &trans
-&trans  &trans  &kp END         &trans          &kp PAGE_DOWN    &trans    &trans    &trans          &kp END    &mkp MB5  &kp DOWN_ARROW  &kp PAGE_DOWN  &trans  &trans
-&trans  &trans  &trans          &trans          &trans           &trans    &trans    &kp LEFT_ARROW  &kp RIGHT                                           &trans  &trans
+&trans  &trans  &kp HOME        &kp UP_ARROW    &kp PAGE_UP      &trans                              &kp HOME   &mkp MB4  &kp UP_ARROW    &kp PAGE_UP          &trans  &trans
+&trans  &trans  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp BSPC  &trans    &trans          &kp DEL    &none     &mkp MB1        &rc_or_mclk MB3 MB2  &trans  &trans
+&trans  &trans  &kp END         &trans          &kp PAGE_DOWN    &trans    &trans    &trans          &kp END    &mkp MB5  &kp DOWN_ARROW  &kp PAGE_DOWN        &trans  &trans
+&trans  &trans  &trans          &trans          &trans           &trans    &trans    &kp LEFT_ARROW  &kp RIGHT                                                 &trans  &trans
             >;
 
             sensor-bindings = <&ROTATE SCRL_DOWN SCRL_UP>;
