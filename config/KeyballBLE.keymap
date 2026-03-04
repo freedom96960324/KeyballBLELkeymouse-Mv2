@@ -41,7 +41,7 @@
         };
     };
 
-      behaviors {
+    behaviors {
         lt_to_layer_0: lt_to_layer_0 {
             compatible = "zmk,behavior-hold-tap";
             label = "LAYER_TAP_TO_0";
@@ -78,15 +78,6 @@
             tapping-term-ms = <200>;
             quick-tap-ms = <0>;
             bindings = <&mkp>, <&mkp>;
-        };
-        rclk_or_scroll: rclk_or_scroll {
-            compatible = "zmk,behavior-hold-tap";
-            label = "RCLK_OR_SCROLL";
-            #binding-cells = <0>;
-            flavor = "balanced";
-            tapping-term-ms = <200>;
-            quick-tap-ms = <0>;
-            bindings = <&mclk_or_scroll 5 MCLK>, <&mkp RCLK>;
         };
     };
 
@@ -139,10 +130,10 @@
 
         layer_4 {
             bindings = <
-&trans  &trans  &kp HOME        &kp UP_ARROW    &kp PAGE_UP      &trans                      &trans   &mkp MB4        &kp UP_ARROW    &kp PAGE_UP      &kp HOME       &trans
-&trans  &trans  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp BSPC  &trans    &trans  &kp DEL  &none           &mkp MB1        &rclk_or_scroll  &trans         &trans
-&trans  &trans  &kp END         &trans          &kp PAGE_DOWN    &trans    &trans    &trans  &trans   &kp END         &mkp MB5        &kp DOWN_ARROW   &kp PAGE_DOWN  &trans
-&trans  &trans  &trans          &trans          &trans           &trans    &trans    &trans  &trans   &kp LEFT_ARROW  &kp RIGHT                        &trans         &trans
+&trans  &trans  &kp HOME        &kp UP_ARROW    &kp PAGE_UP      &trans                      &trans   &mkp MB4        &kp UP_ARROW    &kp PAGE_UP    &kp HOME         &trans
+&trans  &trans  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp BSPC  &trans    &trans  &kp DEL  &none           &mkp MB1        &mclk_or_scroll 5 MCLK  &trans  &trans
+&trans  &trans  &kp END         &trans          &kp PAGE_DOWN    &trans    &trans    &trans  &trans   &kp END         &mkp MB5        &kp DOWN_ARROW  &kp PAGE_DOWN  &trans
+&trans  &trans  &trans          &trans          &trans           &trans    &trans    &trans  &trans   &kp LEFT_ARROW  &kp RIGHT                                &trans  &trans
             >;
 
             sensor-bindings = <&ROTATE SCRL_DOWN SCRL_UP>;
