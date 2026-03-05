@@ -41,80 +41,124 @@
         };
     };
 
-    behaviors {
-        lt_to_layer_0: lt_to_layer_0 {
-            compatible = "zmk,behavior-hold-tap";
-            label = "LAYER_TAP_TO_0";
-            bindings = <&mo>, <&to_layer_0>;
+behaviors {
+    lt_to_layer_0: lt_to_layer_0 {
+        compatible = "zmk,behavior-hold-tap";
+        label = "LAYER_TAP_TO_0";
+        bindings = <&mo>, <&to_layer_0>;
 
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-        };
-
-        ROTATE: ROTATE {
-            compatible = "zmk,behavior-sensor-rotate-var";
-            label = "ROTATE";
-            #sensor-binding-cells = <2>;
-            bindings = <&msc>, <&msc>;
-
-            tap-ms = <20>;
-        };
-
-        mclk_or_scroll: mclk_or_scroll {
-            compatible = "zmk,behavior-hold-tap";
-            label = "MCLK_OR_SCROLL";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <200>;
-            quick-tap-ms = <0>;
-            bindings = <&mo>, <&mkp>;
-        };
-
-        rc_or_mclk: rc_or_mclk {
-            compatible = "zmk,behavior-hold-tap";
-            label = "RC_OR_MCLK";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <200>;
-            quick-tap-ms = <0>;
-            bindings = <&mkp>, <&mkp>;
-        };
-
-        win_minus_under: win_minus_under {
-            compatible = "zmk,behavior-mod-morph";
-            label = "WIN_MINUS_UNDER";
-            #binding-cells = <0>;
-            bindings = <&kp MINUS>, <&kp LS(BSLH)>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        win_plus_equal: win_plus_equal {
-            compatible = "zmk,behavior-mod-morph";
-            label = "WIN_PLUS_EQUAL";
-            #binding-cells = <0>;
-            bindings = <&kp LS(SEMI)>, <&kp LS(MINUS)>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        win_colon_semi: win_colon_semi {
-            compatible = "zmk,behavior-mod-morph";
-            label = "WIN_COLON_SEMI";
-            #binding-cells = <0>;
-            bindings = <&kp SQT>, <&kp SEMI>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        win_layer4_plus_equal: win_layer4_plus_equal {
-            compatible = "zmk,behavior-hold-tap";
-            label = "WIN_LAYER4_PLUS_EQUAL";
-            #binding-cells = <1>;
-            flavor = "balanced";
-            tapping-term-ms = <200>;
-            quick-tap-ms = <0>;
-            bindings = <&mo>, <&win_plus_equal>;
-        };
+        #binding-cells = <2>;
+        tapping-term-ms = <200>;
     };
 
+    ROTATE: ROTATE {
+        compatible = "zmk,behavior-sensor-rotate-var";
+        label = "ROTATE";
+        #sensor-binding-cells = <2>;
+        bindings = <&msc>, <&msc>;
+        tap-ms = <20>;
+    };
+
+    /*
+     * 短押し：マウスボタン（例: RCLK）
+     * ホールド：レイヤー（例: 5 = scroll layer）
+     * 使い方例: &mclk_or_scroll 5 RCLK
+     */
+    mclk_or_scroll: mclk_or_scroll {
+        compatible = "zmk,behavior-hold-tap";
+        label = "MCLK_OR_SCROLL";
+        #binding-cells = <2>;
+        flavor = "balanced";
+        tapping-term-ms = <200>;
+        quick-tap-ms = <0>;
+        bindings = <&mo>, <&mkp>;
+    };
+
+    /*
+     * 例: &rc_or_mclk MCLK RCLK のように2つ渡して使う
+     * 使い方の例は残すが、用途に合わせて keymap 側で使う/使わないは自由
+     */
+    rc_or_mclk: rc_or_mclk {
+        compatible = "zmk,behavior-hold-tap";
+        label = "RC_OR_MCLK";
+        #binding-cells = <2>;
+        flavor = "balanced";
+        tapping-term-ms = <200>;
+        quick-tap-ms = <0>;
+        bindings = <&mkp>, <&mkp>;
+    };
+
+    /*
+     * --- Windows 106/109 補正用（Shift時の出力を mod-morph で切替）---
+     * 使い方例:
+     *   物理「-」キー位置 -> &win_minus_under
+     *   物理「;」キー位置 -> &win_colon_semi
+     *   物理「[」キー位置 -> &win_lbracket_lbrace
+     *   物理「]」キー位置 -> &win_rbracket_rbrace
+     */
+
+    /* 物理「-」:  通常 '-' / Shift '_' を狙う（JP106では '_' が BSLH 側に乗ってることが多い） */
+    win_minus_under: win_minus_under {
+        compatible = "zmk,behavior-mod-morph";
+        label = "WIN_MINUS_UNDER";
+        #binding-cells = <0>;
+        mods = <(MOD_LSFT|MOD_RSFT)>;
+        bindings = <&kp MINUS>, <&kp BSLH>;
+    };
+
+    /* 物理「=」: 通常 '+' / Shift '=' を狙う（通常は LS(SEMI) で '+'、Shift時は MINUS で '=' を狙う） */
+    win_plus_equal: win_plus_equal {
+        compatible = "zmk,behavior-mod-morph";
+        label = "WIN_PLUS_EQUAL";
+        #binding-cells = <0>;
+        mods = <(MOD_LSFT|MOD_RSFT)>;
+        bindings = <&kp LS(SEMI)>, <&kp MINUS>;
+    };
+
+    /*
+     * 「物理 = キーを 長押しで Layer4 を残したい」用
+     * 使い方: keymap 側で「物理=キー位置」を  &win_layer4_plus_equal 4  にする
+     * （= 押しっぱなしで layer4、短押しは win_plus_equal）
+     */
+    win_layer4_plus_equal: win_layer4_plus_equal {
+        compatible = "zmk,behavior-hold-tap";
+        label = "WIN_LAYER4_PLUS_EQUAL";
+        #binding-cells = <1>;
+        flavor = "balanced";
+        tapping-term-ms = <200>;
+        quick-tap-ms = <0>;
+        bindings = <&mo>, <&win_plus_equal>;
+    };
+
+    /* 物理「;」: 通常 ':' / Shift ';' を狙う（JP配列で ':' をどのキーに割り当てるかは環境差あり）
+       まずは “確実に ':' を出す” ため、LS(SCLN) ではなく ZMK側で COLON を使う構成にする。
+       もし Windows 側で ':' にならない場合は、後であなたの実測に合わせてここを調整する。 */
+    win_colon_semi: win_colon_semi {
+        compatible = "zmk,behavior-mod-morph";
+        label = "WIN_COLON_SEMI";
+        #binding-cells = <0>;
+        mods = <(MOD_LSFT|MOD_RSFT)>;
+        bindings = <&kp COLON>, <&kp SEMI>;
+    };
+
+    /* '[' / '{' */
+    win_lbracket_lbrace: win_lbracket_lbrace {
+        compatible = "zmk,behavior-mod-morph";
+        label = "WIN_LBKT_LBRC";
+        #binding-cells = <0>;
+        mods = <(MOD_LSFT|MOD_RSFT)>;
+        bindings = <&kp LBKT>, <&kp LS(LBKT)>;
+    };
+
+    /* ']' / '}' */
+    win_rbracket_rbrace: win_rbracket_rbrace {
+        compatible = "zmk,behavior-mod-morph";
+        label = "WIN_RBKT_RBRC";
+        #binding-cells = <0>;
+        mods = <(MOD_LSFT|MOD_RSFT)>;
+        bindings = <&kp RBKT>, <&kp LS(RBKT)>;
+    };
+};
     keymap {
         compatible = "zmk,keymap";
 
