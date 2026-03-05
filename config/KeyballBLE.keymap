@@ -59,11 +59,7 @@ behaviors {
         tap-ms = <20>;
     };
 
-    /*
-     * 短押し：マウスボタン（例: RCLK）
-     * ホールド：レイヤー（例: 5 = scroll layer）
-     * 使い方例: &mclk_or_scroll 5 RCLK
-     */
+    /* 短押し=中クリック / ホールド=スクロール用レイヤー */
     mclk_or_scroll: mclk_or_scroll {
         compatible = "zmk,behavior-hold-tap";
         label = "MCLK_OR_SCROLL";
@@ -74,10 +70,7 @@ behaviors {
         bindings = <&mo>, <&mkp>;
     };
 
-    /*
-     * 例: &rc_or_mclk MCLK RCLK のように2つ渡して使う
-     * 使い方の例は残すが、用途に合わせて keymap 側で使う/使わないは自由
-     */
+    /* 右クリック/中クリック（用途に応じて使う想定：ここは現状維持） */
     rc_or_mclk: rc_or_mclk {
         compatible = "zmk,behavior-hold-tap";
         label = "RC_OR_MCLK";
@@ -88,77 +81,52 @@ behaviors {
         bindings = <&mkp>, <&mkp>;
     };
 
-    /*
-     * --- Windows 106/109 補正用（Shift時の出力を mod-morph で切替）---
-     * 使い方例:
-     *   物理「-」キー位置 -> &win_minus_under
-     *   物理「;」キー位置 -> &win_colon_semi
-     *   物理「[」キー位置 -> &win_lbracket_lbrace
-     *   物理「]」キー位置 -> &win_rbracket_rbrace
-     */
+    /* ===== Windows(JIS 106/109) 補正用 ===== */
 
-    /* 物理「-」:  通常 '-' / Shift '_' を狙う（JP106では '_' が BSLH 側に乗ってることが多い） */
+    /* 物理「-」: 通常 '-' / Shift '_' */
     win_minus_under: win_minus_under {
         compatible = "zmk,behavior-mod-morph";
         label = "WIN_MINUS_UNDER";
         #binding-cells = <0>;
+        bindings = <&kp MINUS>, <&kp LS(INT1)>;
         mods = <(MOD_LSFT|MOD_RSFT)>;
-        bindings = <&kp MINUS>, <&kp BSLH>;
     };
 
-    /* 物理「=」: 通常 '+' / Shift '=' を狙う（通常は LS(SEMI) で '+'、Shift時は MINUS で '=' を狙う） */
-    win_plus_equal: win_plus_equal {
-        compatible = "zmk,behavior-mod-morph";
-        label = "WIN_PLUS_EQUAL";
-        #binding-cells = <0>;
-        mods = <(MOD_LSFT|MOD_RSFT)>;
-        bindings = <&kp LS(SEMI)>, <&kp MINUS>;
-    };
-
-    /*
-     * 「物理 = キーを 長押しで Layer4 を残したい」用
-     * 使い方: keymap 側で「物理=キー位置」を  &win_layer4_plus_equal 4  にする
-     * （= 押しっぱなしで layer4、短押しは win_plus_equal）
-     */
-    win_layer4_plus_equal: win_layer4_plus_equal {
-        compatible = "zmk,behavior-hold-tap";
-        label = "WIN_LAYER4_PLUS_EQUAL";
-        #binding-cells = <1>;
-        flavor = "balanced";
-        tapping-term-ms = <200>;
-        quick-tap-ms = <0>;
-        bindings = <&mo>, <&win_plus_equal>;
-    };
-
-    /* 物理「;」: 通常 ':' / Shift ';' を狙う（JP配列で ':' をどのキーに割り当てるかは環境差あり）
-       まずは “確実に ':' を出す” ため、LS(SCLN) ではなく ZMK側で COLON を使う構成にする。
-       もし Windows 側で ':' にならない場合は、後であなたの実測に合わせてここを調整する。 */
+    /* 物理「;」: 通常 ':' / Shift ';'（あなたの希望仕様） */
     win_colon_semi: win_colon_semi {
         compatible = "zmk,behavior-mod-morph";
         label = "WIN_COLON_SEMI";
         #binding-cells = <0>;
+        /* 通常 ':' / Shift ';' */
+        bindings = <&kp LS(SQT)>, <&kp SEMI>;
         mods = <(MOD_LSFT|MOD_RSFT)>;
-        bindings = <&kp COLON>, <&kp SEMI>;
     };
 
-    /* '[' / '{' */
-    win_lbracket_lbrace: win_lbracket_lbrace {
+    /* 物理「=」(=キーを長押しでLayer4にしたい前提):
+       短押し: '+' / Shift: '='
+       長押し: Layer4（押してる間だけ） */
+    win_plus_equal: win_plus_equal {
         compatible = "zmk,behavior-mod-morph";
-        label = "WIN_LBKT_LBRC";
+        label = "WIN_PLUS_EQUAL";
         #binding-cells = <0>;
+        /* 通常 '+' / Shift '=' */
+        bindings = <&kp LS(SEMI)>, <&kp LS(MINUS)>;
         mods = <(MOD_LSFT|MOD_RSFT)>;
-        bindings = <&kp LBKT>, <&kp LS(LBKT)>;
     };
 
-    /* ']' / '}' */
-    win_rbracket_rbrace: win_rbracket_rbrace {
-        compatible = "zmk,behavior-mod-morph";
-        label = "WIN_RBKT_RBRC";
+    /* ↑の win_plus_equal を「長押しで layer_4」化した合成キー
+       ※ 重要：ここは #binding-cells = <0> にして、hold 側の layer を中に埋め込む */
+    win_layer4_plus_equal: win_layer4_plus_equal {
+        compatible = "zmk,behavior-hold-tap";
+        label = "WIN_L4_PLUS_EQUAL";
         #binding-cells = <0>;
-        mods = <(MOD_LSFT|MOD_RSFT)>;
-        bindings = <&kp RBKT>, <&kp LS(RBKT)>;
+        flavor = "balanced";
+        tapping-term-ms = <200>;
+        quick-tap-ms = <0>;
+        bindings = <&mo 4>, <&win_plus_equal>;
     };
 };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -176,7 +144,7 @@ behaviors {
         layer_1 {
             bindings = <
 &kp ESC     &kp Q     &kp W     &kp E   &kp R  &kp T                                               &kp Y        &kp U  &kp I      &kp O    &kp P                     &win_minus_under
-&kp TAB     &lt 4 A   &kp S     &kp D   &kp F  &kp G        &mclk_or_scroll 5 MCLK    &kp LG(TAB)  &kp H        &kp J  &kp K      &kp L    &win_layer4_plus_equal 4  &win_colon_semi
+&kp TAB     &lt 4 A   &kp S     &kp D   &kp F  &kp G        &mclk_or_scroll 5 MCLK    &kp LG(TAB)  &kp H        &kp J  &kp K      &kp L    &win_layer4_plus_equal  &win_colon_semi
 &kp LSHIFT  &kp Z     &kp X     &kp C   &kp V  &kp B        &kp LS(LA(TAB))           &kp LA(TAB)  &kp N        &kp M  &kp COMMA  &kp DOT  &kp SLASH                 &mt RSHFT RBKT
 &kp LCTRL   &kp LALT  &kp LGUI  &trans  &mo 6  &lt 3 SPACE  &lt 2 INT5                &lt 2 INT4   &lt 3 ENTER                             &kp RALT                  &mt LCTRL BSLH
             >;
