@@ -93,7 +93,7 @@
             bindings = <
 &trans            &kp Q   &kp W         &kp E   &kp R      &trans                                  &kp F10    &kp F11         &kp I      &kp O   &trans  &kp BACKSPACE
 &trans            &kp A   &kp S         &kp D   &none      &none      &kp F2       &kp UP_ARROW    &trans     &kp UP_ARROW    &trans     &kp L   &trans  &kp ENTER
-&kp LEFT_SHIFT    &kp Z   &none         &kp C   &kp V      &none      &kp M        &kp DOWN_ARROW  &kp LEFT   &kp DOWN_ARROW  &kp RIGHT  &trans  &trans  &trans
+&kp LEFT_SHIFT    &kp Z   &kp X         &kp C   &kp V      &none      &kp M        &kp DOWN_ARROW  &kp LEFT   &kp DOWN_ARROW  &kp RIGHT  &trans  &trans  &trans
 &kp LEFT_CONTROL  &trans  &kp LEFT_ALT  &trans  &kp SPACE  &kp SPACE  &kp SPACE    &kp SPACE       &kp SPACE                                     &trans  &trans
             >;
 
