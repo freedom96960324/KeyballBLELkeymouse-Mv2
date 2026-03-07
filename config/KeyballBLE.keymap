@@ -102,10 +102,10 @@
 
         MOUSE {
             bindings = <
-&trans  &kp Q   &kp W   &kp E      &kp R      &none                                &mkp LCLK  &mkp LCLK  &mkp RCLK  &mkp RCLK  &mkp RCLK  &kp BACKSPACE
-&trans  &none   &trans  &mkp LCLK  &mkp MCLK  &mkp RCLK  &kp F2    &kp UP_ARROW    &mkp LCLK  &mkp LCLK  &mkp RCLK  &mkp RCLK  &mkp RCLK  &kp ENTER
-&trans  &trans  &trans  &trans     &trans     &trans     &trans    &kp DOWN_ARROW  &mkp LCLK  &mkp LCLK  &mkp RCLK  &mkp RCLK  &mkp RCLK  &trans
-&trans  &trans  &trans  &trans     &trans     &trans     &trans    &kp BACKSPACE   &kp ENTER                                   &trans     &trans
+&kp ESCAPE        &kp Q    &kp W         &kp E   &kp R           &kp T                                         &mkp LCLK  &mkp LCLK  &mkp RCLK  &mkp RCLK  &mkp RCLK  &kp BACKSPACE
+&kp CAPS          &kp A    &kp S         &kp D   &kp F           &kp G      &kp F2             &kp UP_ARROW    &mkp LCLK  &mkp LCLK  &mkp RCLK  &mkp RCLK  &mkp RCLK  &kp ENTER
+&kp LEFT_SHIFT    &kp Z    &kp X         &kp C   &kp V           &kp B      &trans             &kp DOWN_ARROW  &mkp LCLK  &mkp LCLK  &mkp RCLK  &mkp RCLK  &mkp RCLK  &trans
+&kp LEFT_CONTROL  &kp TAB  &kp LEFT_ALT  &trans  &kp LEFT_ARROW  &kp SPACE  &kp RIGHT_ARROW    &kp BACKSPACE   &kp ENTER                                   &trans     &kp DELETE
             >;
 
             sensor-bindings = <&ROTATE SCRL_DOWN SCRL_UP>;
@@ -122,7 +122,7 @@
             sensor-bindings = <&ROTATE SCRL_DOWN SCRL_UP>;
         };
 
-        layer_6 {
+        Bluetooth {
             bindings = <
 &trans  &trans  &trans        &trans        &trans        &trans                       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &trans
 &trans  &trans  &trans        &trans        &trans        &trans     &trans    &trans  &trans        &trans        &trans        &trans        &trans          &trans
